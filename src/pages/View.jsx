@@ -35,7 +35,7 @@ const View = () => {
 	const handleDelete = async (id) => { 
 		try { 
 
-			await axios.delete(`http://localhost:5500/api/entries/${data._id}`) 
+			await axios.delete(`https://travel-journal-server.onrender.com/api/entries/${data._id}`)
 
 			navigate('/') 
 		} catch (err) { 
