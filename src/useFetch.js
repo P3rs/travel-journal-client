@@ -13,7 +13,7 @@ const useFetch = (url) => {
 			setLoading(true); 
 			try { 
 
-				const res = await axios.get("http://localhost:5500/api" + url)
+				const res = await axios.get("https://travel-journal-server.onrender.com/api" + url)
 				
 				setData(res.data); 
 			} catch (err) { 
@@ -27,7 +27,7 @@ const useFetch = (url) => {
 	const reFetch = async () => { 
 		setLoading(true); 
 		try { 
-			const res = await axios.get("http://localhost:5500/api/users" + url)
+			const res = await axios.get("https://travel-journal-server.onrender.com/api/users" + url)
 
 			setData(res.data); 
 		} catch (err) { 

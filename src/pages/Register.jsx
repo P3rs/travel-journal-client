@@ -39,10 +39,10 @@ function Register() {
 			const data = new FormData();
 			data.append("image", file);
 			const uploadRes = await axios.post(
-				"http://localhost:5500/upload",
+				"https://travel-journal-server.onrender.com/upload",
 				data
 			);
-			const url = "http://localhost:5500/uploads/" + uploadRes.data.id;
+			const url = "https://travel-journal-server.onrender.com/uploads/" + uploadRes.data.id;
 
 			newUser = {
 				...info,
@@ -56,7 +56,7 @@ function Register() {
 		}
 
 		try {
-			const response = await axios.post("http://localhost:5500/api/users/register",
+			const response = await axios.post("https://travel-journal-server.onrender.com/api/users/register",
 				newUser, {
 				withcredentials: false
 			});

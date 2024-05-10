@@ -50,10 +50,10 @@ const Create = () => {
 				const data = new FormData();
 				data.append("image", file);
 				const uploadRes = await axios.post( 
-					"http://localhost:5500/upload",
+					"https://travel-journal-server.onrender.com/upload",
 					data
 				);
-				const url = "http://localhost:5500/uploads/" + uploadRes.data.id;
+				const url = "https://travel-journal-server.onrender.com/uploads/" + uploadRes.data.id;
 				return url; 
 			}));
 
@@ -70,7 +70,7 @@ const Create = () => {
 
 
 		try { 
-			const response = await axios.post('http://localhost:5500/api/entries/',
+			const response = await axios.post('https://travel-journal-server.onrender.com/api/entries/',
 				newEntry, { 
 				withCredentials: false
 			});
