@@ -1,42 +1,56 @@
-// client/src/useFetch.js 
+// client/src/useFetch.js
 
-import { useEffect, useState } from "react"; 
-import axios from "axios"; 
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const useFetch = (url) => { 
-	const [data, setData] = useState([]); 
-	const [loading, setLoading] = useState(false); 
-	const [error, setError] = useState(false);
+const useFetch = (url) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-	useEffect(() => { 
-		const fetchData = async () => { 
-			setLoading(true); 
-			try { 
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const res = await axios.get("http://localhost:5500/api" + url);
 
-				const res = await axios.get("https://travel-journal-server.onrender.com/api" + url)
-				
-				setData(res.data); 
-			} catch (err) { 
-				setError(err); 
-			} 
-			setLoading(false); 
-		}; 
-		fetchData(); 
-	}, [url]); 
+        //	const res = await axios.get("https://travel-journal-server.onrender.com/api" + url)
 
-	const reFetch = async () => { 
-		setLoading(true); 
-		try { 
-			const res = await axios.get("https://travel-journal-server.onrender.com/api/users" + url)
+        setData(res.data);
+      } catch (err) {
+        setError(err);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, [url]);
 
-			setData(res.data); 
-		} catch (err) { 
-			setError(err); 
-		} 
-		setLoading(false); 
-	}; 
+  // const reFetch = async () => {
+  // 	setLoading(true);
+  // 	try {
+  // 		const res = await axios.get("https://travel-journal-server.onrender.com/api/users" + url)
+  //       setData(res.data);
+  //     } catch (err) {
+  //       setError(err);
+  //     }
+  //     setLoading(false);
+  //   };
+  //   fetchData();
+  // };
 
-	return { data, loading, error, reFetch }; 
-}; 
+  const reFetch = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get("http://localhost:5500/api/users" + url);
+
+      setData(res.data);
+    } catch (err) {
+      setError(err);
+    }
+    setLoading(false);
+  };
+
+  return { data, loading, error, reFetch };
+};
 
 export default useFetch;
