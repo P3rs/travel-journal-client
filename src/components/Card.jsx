@@ -11,13 +11,13 @@ function Card(props) {
 		try {
 			if (isFavorite) {
 				const response = await axios.delete(
-					"http://localhost:5500/api/favorite/del",
+					"https://travel-journal-server.onrender.com/api/favorite/del",
 					{ data: { props } }
 				);
 				props?.setLoading(true);
 			} else {
 				const response = await axios.post(
-					"http://localhost:5500/api/favorite",
+					"https://travel-journal-server.onrender.com/api/favorite",
 					propsToSend
 				);
 				setIsFavorite(true);
