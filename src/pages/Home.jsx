@@ -1,36 +1,22 @@
-// client/src/pages/Home.jsx 
+import React, { useContext, useState } from "react";
+import Navbar from "../components/Navbar";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useFetch from "../useFetch";
+import { AuthContext } from "../authContext";
+import "../styles/home.css";
+import Card from "../components/Card";
 
-import React, { 
-	useContext, 
-	useState 
-} from 'react';
-import Navbar from '../components/Navbar';
-import { 
-	faMagnifyingGlass 
-} from "@fortawesome/free-solid-svg-icons"; 
-import {
-	FontAwesomeIcon
-} from "@fortawesome/react-fontawesome"; 
-import useFetch from "../useFetch"
-import { 
-	AuthContext 
-} from '../authContext'; 
-import '../styles/home.css';
-import Card from '../components/Card'; 
-
-const Home = () => { 
-	const [query, setQuery] = useState(""); 
-	const { user } = useContext(AuthContext); 
-	const { data, loading } = useFetch( `/entries`);
+const Home = () => {
+	const [query, setQuery] = useState("");
+	const { user } = useContext(AuthContext);
+	const { data, loading } = useFetch(`/entries`);
 	const keys = ["title", "location", "date"];
-
-	const search = (data) => { 
-		return data.filter((item) => 
-			keys.some((key) => item[key] && 
-				item[key].toLowerCase().includes(query)) 
-		); 
+	const search = (data) => {
+		return data.filter((item) =>
+			keys.some((key) => item[key] && item[key].toLowerCase().includes(query))
+		);
 	};
-
 
 	return (
 		<div>
@@ -43,42 +29,43 @@ const Home = () => {
 							type="text"
 							placeholder="Search places or dates"
 							onChange={(e) => setQuery(e.target.value)}
-						/> 
-						<FontAwesomeIcon 
-							className="icon"
-							icon={faMagnifyingGlass} /> 
-					</div> 
-				</div> 
-			</div> 
+						/>
+						<FontAwesomeIcon className="icon" icon={faMagnifyingGlass} />
+					</div>
+				</div>
+			</div>
 
-			<div className="searchedPosts"> 
-				{loading ? ( 
-					<> 
-						<div className="p"
+			<div className="searchedPosts">
+				{loading ? (
+					<>
+						<div
+							className="p"
 							style={{
-								color: "white", "fontFamily":
-									"'Kaushan Script', cursive"
-							}}> 
-							Loading... 
-						</div> 
-					</> 
-				) : ( 
-					<> 
-						{search(data)?.map((item, i) => ( 
-							<Card 
-								key={i} // Remember to add a unique key 
-								_id={item._id} 
+								color: "white",
+								fontFamily: "'Kaushan Script', cursive",
+							}}
+						>
+							Loading...
+						</div>
+					</>
+				) : (
+					<>
+						{search(data)?.map((item, i) => (
+							<Card
+								key={i} // Remember to add a unique key
+								_id={item._id}
 								photos={item.photos}
-								title={item.title} 
-								date={item.date} 
-								location={item.location} 
-								text={item.text} 
-							/> 
-						))} 
-					</> 
-				)} 
-			</div> 
-		</div> 
+								title={item.title}
+								date={item.date}
+								location={item.location}
+								text={item.text}
+								user_id={user._id}
+							/>
+						))}
+					</>
+				)}
+			</div>
+		</div>
 	);
 };
 

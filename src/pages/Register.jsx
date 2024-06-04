@@ -42,6 +42,7 @@ function Register() {
 				"https://travel-journal-server.onrender.com/upload",
 				data
 			);
+			// https://travel-journal-server.onrender.com
 			const url = "https://travel-journal-server.onrender.com/uploads/" + uploadRes.data.id;
 
 			newUser = {

@@ -87,3 +87,7 @@
 	transform: translateY(-2px); 
 	background-color: rgb(233, 246, 254); 
 }
+
+.button-container {
+	gap: 1rem;
+}

@@ -50,6 +50,7 @@ const Create = () => {
 				const data = new FormData();
 				data.append("image", file);
 				const uploadRes = await axios.post( 
+					// "http://localhost:5500/upload",
 					"https://travel-journal-server.onrender.com/upload",
 					data
 				);
@@ -69,7 +70,7 @@ const Create = () => {
 		} 
 
 
-		try { 
+		try {
 			const response = await axios.post('https://travel-journal-server.onrender.com/api/entries/',
 				newEntry, { 
 				withCredentials: false
